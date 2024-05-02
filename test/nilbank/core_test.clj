@@ -1,5 +1,6 @@
 (ns nilbank.core-test
-  (:require [clojure.test :refer [deftest is testing]]))
+  (:require
+   [clojure.test :refer [deftest is testing]]))
 
 (deftest dumb-test
   (testing "dumb testing"

@@ -1,10 +1,32 @@
 (defproject nilbank "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
-  :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
-            :url "https://www.eclipse.org/legal/epl-2.0/"}
+  :description "nilbank"
+  :url "https://github.com/0x0th30/nilbank"
+
+  :exclude [log4j]
   :dependencies [[org.clojure/clojure "1.11.1"]]
+
+  :profiles {:uberjar {:aot :all}
+
+             :unit {:test-paths ^:replace ["test/integration/"]}
+
+             :integration {:test-paths ^:replace ["test/unit/"]}
+
+             :dev {:source-paths   ["dev"]
+                   :resource-paths ["test/resources"]
+                   :plugins        [[com.github.clojure-lsp/lein-clojure-lsp "1.4.9"]]
+                   :dependencies   [[org.clojure/tools.namespace "1.4.4"]]
+                   :repl-options   {:init-ns user}}}
+
+  :min-lein-version "2.10.0"
+
+  :aliases {"diagnostics"  ["clojure-lsp" "diagnostics"]
+            "format"       ["clojure-lsp" "format" "--dry"]
+            "format-fix"   ["clojure-lsp" "format"]
+            "clean-ns"     ["clojure-lsp" "clean-ns" "--dry"]
+            "clean-ns-fix" ["clojure-lsp" "clean-ns"]
+            "lint"         ["do" ["diagnostics"] ["format"] ["clean-ns"]]
+            "lint-fix"     ["do" ["clean-ns-fix"] ["format-fix"]]}
+
   :main ^:skip-aot nilbank.core
-  :target-path "target/%s"
-  :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+
+  :test-paths ["test/unit" "test/integration"])
