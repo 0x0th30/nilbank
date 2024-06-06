@@ -25,7 +25,9 @@
             "clean-ns"     ["clojure-lsp" "clean-ns" "--dry"]
             "clean-ns-fix" ["clojure-lsp" "clean-ns"]
             "lint"         ["do" ["diagnostics"] ["format"] ["clean-ns"]]
-            "lint-fix"     ["do" ["clean-ns-fix"] ["format-fix"]]}
+            "lint-fix"     ["do" ["clean-ns-fix"] ["format-fix"]]
+            "unit"         ["with-profile" "+unit" "test"]
+            "integration"  ["with-profile" "+integration" "test"]}
 
   :main ^:skip-aot nilbank.core
 
