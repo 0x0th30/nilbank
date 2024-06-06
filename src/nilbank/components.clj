@@ -1,6 +1,6 @@
 (ns nilbank.components)
 
-(def _base
+(def base
   {:http     :foo
    :producer :bar
    :consumer :baz
